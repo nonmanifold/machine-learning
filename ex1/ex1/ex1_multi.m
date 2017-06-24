@@ -35,16 +35,18 @@ fprintf('Loading data ...\n');
 
 %% Load Data
 data = load('ex1data2.txt');
+%data=data(1:2, :);
 X = data(:, 1:2);
 y = data(:, 3);
 m = length(y);
 
 % Print out some data points
-fprintf('First 10 examples from the dataset: \n');
-fprintf(' x = [%.0f %.0f], y = %.0f \n', [X(1:10,:) y(1:10,:)]');
+examples=min(10, m);
+fprintf('First %d examples from the dataset: \n', examples);
+fprintf(' x = [%.0f %.0f], y = %.0f \n', [X(1:examples,:) y(1:examples,:)]');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 % Scale features and set them to zero mean
 fprintf('Normalizing Features ...\n');
@@ -82,7 +84,7 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
+alpha = 0.1; % bigger learning rate for faster convergence
 num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
@@ -104,8 +106,8 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
-
+normX =([1650, 3] - mu)./ sigma
+price = [1 normX] * theta;
 
 % ============================================================
 

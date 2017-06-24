@@ -26,12 +26,15 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-
-
-
-
-
-
+for dim = 1:size(X, 2)
+  dimData=X(:,dim);
+  mu(dim)=mean(dimData);
+  sigma(dim)=std(dimData);
+  if sigma(dim)==0 % all data is costant 
+    sigma(dim)=1;
+  end
+  X_norm(:, dim) = (dimData-mu(dim))/sigma(dim);
+end
 
 
 % ============================================================
