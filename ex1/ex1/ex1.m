@@ -70,7 +70,7 @@ fprintf('\nWith theta = [-1 ; 2]\nCost computed = %f\n', J);
 fprintf('Expected cost value (approx) 54.24\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 fprintf('\nRunning Gradient Descent ...\n')
 % run gradient descent
@@ -97,7 +97,7 @@ fprintf('For population = 70,000, we predict a profit of %f\n',...
     predict2*10000);
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ============= Part 4: Visualizing J(theta_0, theta_1) =============
 fprintf('Visualizing J(theta_0, theta_1) ...\n')
