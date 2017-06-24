@@ -17,9 +17,7 @@ J = 0;
 
 norm=1/(2*length(X));
 
-thetaX=X*theta;
-J= norm*(sum((thetaX - y) .^ 2));
-
+J= norm * (X* theta - y)' * (X* theta - y);
 
 % =========================================================================
 
