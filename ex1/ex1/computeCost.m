@@ -13,9 +13,10 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
+norm=1/(2*length(X));
 
-
-
+thetaX=X*theta;
+J= norm*(sum((thetaX - y) .^ 2));
 
 % =========================================================================
 
