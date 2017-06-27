@@ -19,9 +19,19 @@ grad = zeros(size(theta));
 %
 % Note: grad should have the same dimensions as theta
 %
+norm = 1/m;
+hX=sigmoid(X*theta); 
 
+% loop-based computation of J:
+J=0;
+for i=1:m
+  J=J -y(i)*log(hX(i)) - (1-y(i))*log(1-hX(i));
+end
+J= norm* J;
+% vectorized computation of J:
+J= norm* ( -y' * log(hX) - (1-y)'*log(1-hX));
 
-
+grad=X'*(hX-y)*norm; % gradient vector, using vectorized formula
 
 
 
