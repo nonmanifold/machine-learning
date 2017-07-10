@@ -62,8 +62,33 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% make 'y' also a matrix:
+yNew= zeros(m, num_labels);
+for i=1:m
+  yNew(i, y(i)) =1;
+end
 
+#y=yNew;
+norm = -1/m;
 
+% Add ones to the X data matrix
+X = [ones(m, 1) X];
+
+a2=sigmoid(X*Theta1');
+% Add ones to the hX1 data matrix
+Theta1Rest=Theta1(:, 2:end);
+
+a3=sigmoid([ones(m, 1) a2]*Theta2');
+Theta2Rest=Theta2(:, 2:end);
+
+%J= norm* ( yNew' * log(a3) + (1-yNew)'*log(1-a3)) + lambda/(2*m)*(sum(Theta1Rest.^2)+sum(Theta2Rest.^2)); 
+for i=1:m
+  yi=yNew(i,:);
+  a3i=a3(i, :);
+  J+=( yi * log(a3i') + (1-yi)*log(1-a3i'));
+end
+
+J= norm* J + lambda/(2*m)*(sum(sum(Theta1Rest.^2))+sum(sum(Theta2Rest.^2))); 
 
 
 
