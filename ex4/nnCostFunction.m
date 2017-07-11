@@ -73,12 +73,12 @@ norm = -1/m;
 
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
-
-a2=sigmoid(X*Theta1');
-% Add ones to the hX1 data matrix
+z2=X*Theta1';
+a2=sigmoid(z2);
 Theta1Rest=Theta1(:, 2:end);
 
-a3=sigmoid([ones(m, 1) a2]*Theta2');
+z3=[ones(m, 1) a2]*Theta2';
+a3=sigmoid(z3);
 Theta2Rest=Theta2(:, 2:end);
 
 %J= norm* ( yNew' * log(a3) + (1-yNew)'*log(1-a3)) + lambda/(2*m)*(sum(Theta1Rest.^2)+sum(Theta2Rest.^2)); 
@@ -92,9 +92,9 @@ J= norm* J + lambda/(2*m)*(sum(sum(Theta1Rest.^2))+sum(sum(Theta2Rest.^2)));
 
 
 
+for t=1:m
 
-
-
+end
 
 
 
