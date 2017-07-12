@@ -14,8 +14,9 @@ g = zeros(size(z));
 
 
 
-g=arrayfun(@(t)(sigmoid(t)*(1- sigmoid(t))), z);
-
+%g=arrayfun(@(t)(sigmoid(t)*(1- sigmoid(t))), z);
+a=sigmoid(z);
+g=a.*(1- a);
 
 
 
