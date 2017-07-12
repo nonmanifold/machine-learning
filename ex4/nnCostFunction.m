@@ -96,8 +96,8 @@ for i=1:m
   Theta1_grad = Theta1_grad + delta2(:, 2:end)'*X(i,:);
 end
 
-Theta1_grad=1/m*Theta1_grad + lambda*Theta1Rest;
-Theta2_grad=1/m*Theta2_grad + lambda*Theta2Rest;
+Theta1_grad=1/m*Theta1_grad + lambda*Theta1Rest/m;
+Theta2_grad=1/m*Theta2_grad + lambda*Theta2Rest/m;
 
 J= norm* J + lambda/(2*m)*(sum(sum(Theta1Rest.^2))+sum(sum(Theta2Rest.^2))); 
 
