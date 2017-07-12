@@ -75,26 +75,34 @@ norm = -1/m;
 X = [ones(m, 1) X];
 z2=X*Theta1';
 a2=sigmoid(z2);
-Theta1Rest=Theta1(:, 2:end);
+Theta1Rest=[zeros(hidden_layer_size, 1) Theta1(:, 2:end)];% add zeros to exclude from normalization
 
 z3=[ones(m, 1) a2]*Theta2';
 a3=sigmoid(z3);
-Theta2Rest=Theta2(:, 2:end);
+Theta2Rest=[zeros(size(Theta2,1), 1) Theta2(:, 2:end)];% add zeros to exclude from normalization
 
-%J= norm* ( yNew' * log(a3) + (1-yNew)'*log(1-a3)) + lambda/(2*m)*(sum(Theta1Rest.^2)+sum(Theta2Rest.^2)); 
 for i=1:m
   yi=yNew(i,:);
-  a3i=a3(i, :);
+  a3i=a3(i,:);
+  z2i=[0 z2(i,:)];
+  
   J+=( yi * log(a3i') + (1-yi)*log(1-a3i'));
+  
+  delta3 = a3i-yi; % for output layer compute delta directly 
+  delta2 = (delta3*Theta2 ).* sigmoidGradient(z2i);
+ 
+  a2i=[0 a2(i,:)];
+  Theta2_grad = Theta2_grad + delta3'*a2i;
+  Theta1_grad = Theta1_grad + delta2(:, 2:end)'*X(i,:);
 end
+
+Theta1_grad=1/m*Theta1_grad + lambda*Theta1Rest;
+Theta2_grad=1/m*Theta2_grad + lambda*Theta2Rest;
 
 J= norm* J + lambda/(2*m)*(sum(sum(Theta1Rest.^2))+sum(sum(Theta2Rest.^2))); 
 
 
 
-for t=1:m
-
-end
 
 
 
