@@ -92,6 +92,7 @@ for i=1:m
   delta2 = (delta3*Theta2 ).* sigmoidGradient(z2i);
  
   a2i=[0 a2(i,:)];
+  a2i=[1 a2(i,:)];
   Theta2_grad = Theta2_grad + delta3'*a2i;
   Theta1_grad = Theta1_grad + delta2(:, 2:end)'*X(i,:);
 end
