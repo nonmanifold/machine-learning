@@ -22,9 +22,11 @@ grad = zeros(size(theta));
 norm = 0.5/m;
 hx=X*theta;
 diff=(hx-y);
-J= norm*sum(diff.^2) + lambda*norm*sum(theta(2:end).^2);
+thetaRest=[0; theta(2:size(theta))]; % to use it for regularization in gradient computation
+J= norm*sum(diff.^2) + lambda*norm*sum(thetaRest.^2);
 
-
+diffGrad=diff.*X;
+grad= 1/m*sum(diffGrad)+ lambda/m*(thetaRest');
 
 
 
