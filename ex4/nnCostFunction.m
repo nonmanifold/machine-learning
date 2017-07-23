@@ -74,36 +74,20 @@ norm = -1/m;
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
 z2=X*Theta1';
-a2=sigmoid(z2);
+a2=[ones(m, 1) sigmoid(z2)];
 Theta1Rest=[zeros(hidden_layer_size, 1) Theta1(:, 2:end)];% add zeros to exclude from normalization
 
-z3=[ones(m, 1) a2]*Theta2';
+z3=a2*Theta2';
 a3=sigmoid(z3);
 Theta2Rest=[zeros(size(Theta2,1), 1) Theta2(:, 2:end)];% add zeros to exclude from normalization
 
-for i=1:m
-  yi=yNew(i,:);
-  a3i=a3(i,:);
-  z2i=z2(i,:);
-  
-  J+=( yi * log(a3i') + (1-yi)*log(1-a3i'));
-  
-  delta3 = a3i-yi; % for output layer compute delta directly 
-  delta2 = (delta3*Theta2(:,2:end) ).* sigmoidGradient(z2i);
- 
-  a2i=[1 a2(i,:)];
-  Theta2_grad = Theta2_grad + delta3'*a2i;
-  Theta1_grad = Theta1_grad + delta2'*X(i,:);
-end
+J =norm*  sum(sum(yNew.*log(a3) + (1-yNew).*log(1-a3))) + lambda/(2*m)*(sum(sum(Theta1Rest.^2))+sum(sum(Theta2Rest.^2)));
 
-Theta1_grad=(1/m)*Theta1_grad + (lambda/m)*Theta1Rest;
-Theta2_grad=(1/m)*Theta2_grad + (lambda/m)*Theta2Rest;
+delta3 = a3-yNew;
+delta2 = (delta3*Theta2(:,2:end) ).* sigmoidGradient(z2);
 
-J= norm* J + lambda/(2*m)*(sum(sum(Theta1Rest.^2))+sum(sum(Theta2Rest.^2))); 
-
-
-
-
+Theta2_grad=(1/m)* (delta3'*a2) + (lambda/m)*Theta2Rest;
+Theta1_grad=(1/m)* (delta2'*X) + (lambda/m)*Theta1Rest;
 
 
 
