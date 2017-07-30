@@ -41,7 +41,7 @@ sigma = 0.3;
 C=1.000000;
 sigma=0.100000;
 
-fprintf('found C=%f sigma=%f.\n', C, sigma);
+%fprintf('found C=%f sigma=%f.\n', C, sigma);
 
 
 % =========================================================================
