@@ -23,10 +23,25 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+%error= Inf;
+%for Ci= [0.01,0.03,0.1,0.3,1,3,10,30]
+%  for sigmai= [0.01,0.03,0.1,0.3,1,3,10,30]
+%    %compute
+%    model= svmTrain(X, y, Ci, @(x1, x2) gaussianKernel(x1, x2, sigmai));
+%    predictions = svmPredict(model, Xval);
+%    currError=mean(double(predictions ~= yval));
+%    if currError<error
+%      C=Ci;
+%      sigma=sigmai;
+%      error=currError;
+%    end
+%  end
+%end
 
+C=1.000000;
+sigma=0.100000;
 
-
-
+fprintf('found C=%f sigma=%f.\n', C, sigma);
 
 
 % =========================================================================
