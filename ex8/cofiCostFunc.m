@@ -44,13 +44,11 @@ M=(X*Theta' - Y).^2;
 J=1/2*sum(sum(R.*M));
 
 
+M1=R.*(X*Theta' - Y);
 
 
-
-
-
-
-
+X_grad= M1*Theta;
+Theta_grad=M1'*X;
 
 
 
