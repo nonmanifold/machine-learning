@@ -21,11 +21,11 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
-
-
-
-
-
+%mu= (1/m)*sum(X, 1);
+mu=mean(X);
+%Xcentered2=(bxfun(@minus, X, mu)).^2;
+%sigma2=(1/m)*sum(Xcentered2);
+sigma2= var(X,1);
 
 
 
